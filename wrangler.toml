@@ -1,0 +1,10 @@
+name = "bg-remover"
+main = "src/worker.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+# Remove.bg API Key 通过 wrangler secret 设置，不写在这里
+
+[[rules]]
+type = "ESModule"
+globs = ["**/*.js"]

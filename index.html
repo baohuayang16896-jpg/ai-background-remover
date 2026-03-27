@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI背景移除工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 AI背景移除</h1>
+        <p class="subtitle">一键去除图片背景，快速生成透明图</p>
+        
+        <div class="upload-area" id="uploadArea">
+            <input type="file" id="fileInput" accept="image/*" hidden>
+            <div class="upload-content">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                </svg>
+                <p>点击或拖拽图片到此处</p>
+                <span>支持 JPG、PNG 格式</span>
+            </div>
+        </div>
+
+        <div class="result-area" id="resultArea" style="display:none;">
+            <div class="image-compare">
+                <div class="image-box">
+                    <h3>原图</h3>
+                    <img id="originalImg" alt="原图">
+                </div>
+                <div class="image-box">
+                    <h3>去背景后</h3>
+                    <img id="resultImg" alt="结果">
+                </div>
+            </div>
+            <div class="actions">
+                <button id="downloadBtn" class="btn-primary">下载图片</button>
+                <button id="resetBtn" class="btn-secondary">重新上传</button>
+            </div>
+        </div>
+
+        <div class="loading" id="loading" style="display:none;">
+            <div class="spinner"></div>
+            <p>正在处理中...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
