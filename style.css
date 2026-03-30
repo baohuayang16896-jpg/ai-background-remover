@@ -149,6 +149,64 @@ button {
     100% { transform: rotate(360deg); }
 }
 
+.auth-section {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.btn-google {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.btn-google:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+.auth-note {
+    margin-top: 15px;
+    color: #666;
+    font-size: 14px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 12px;
+    background: #f8f9ff;
+    border-radius: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.btn-logout {
+    padding: 6px 16px;
+    background: #ff4757;
+    color: white;
+    font-size: 14px;
+}
+
+.btn-logout:hover {
+    background: #ee5a6f;
+}
+
 @media (max-width: 768px) {
     .image-compare {
         grid-template-columns: 1fr;

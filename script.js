@@ -1,3 +1,13 @@
+// 处理 OAuth 回调
+if (window.location.pathname === '/auth/callback') {
+    auth.handleCallback();
+}
+
+// UI 元素
+const authSection = document.getElementById('authSection');
+const userInfo = document.getElementById('userInfo');
+const loginBtn = document.getElementById('loginBtn');
+const logoutBtn = document.getElementById('logoutBtn');
 const uploadArea = document.getElementById('uploadArea');
 const fileInput = document.getElementById('fileInput');
 const resultArea = document.getElementById('resultArea');
@@ -8,6 +18,23 @@ const downloadBtn = document.getElementById('downloadBtn');
 const resetBtn = document.getElementById('resetBtn');
 
 let processedImageUrl = '';
+
+// 初始化认证状态
+if (auth.isLoggedIn()) {
+    const user = auth.getUser();
+    document.getElementById('userAvatar').src = user.picture;
+    document.getElementById('userName').textContent = user.name;
+    authSection.style.display = 'none';
+    userInfo.style.display = 'flex';
+    uploadArea.style.display = 'block';
+} else {
+    authSection.style.display = 'block';
+    userInfo.style.display = 'none';
+    uploadArea.style.display = 'none';
+}
+
+loginBtn.addEventListener('click', () => auth.login());
+logoutBtn.addEventListener('click', () => auth.logout());
 
 uploadArea.addEventListener('click', () => fileInput.click());
 
