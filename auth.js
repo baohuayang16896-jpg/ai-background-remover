@@ -1,6 +1,6 @@
-// Google OAuth 配置
 const GOOGLE_CLIENT_ID = '35125519641-lubljhc670hl669qb4u70km61dklc42u.apps.googleusercontent.com';
-const REDIRECT_URI = 'https://bg-remover-9at.pages.dev/auth/callback';
+const REDIRECT_URI = window.location.origin + '/auth/callback';
+const API_BASE = '/api';
 
 class Auth {
     constructor() {
@@ -38,10 +38,17 @@ class Auth {
             const userData = await response.json();
             
             this.user = {
+                google_id: userData.id,
                 name: userData.name,
                 email: userData.email,
                 picture: userData.picture
             };
+            
+            await fetch(`${API_BASE}/user`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.user)
+            });
             
             localStorage.setItem('user', JSON.stringify(this.user));
             window.location.href = '/';

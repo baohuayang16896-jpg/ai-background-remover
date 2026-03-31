@@ -1,10 +1,8 @@
 name = "bg-remover"
-main = "src/worker.js"
 compatibility_date = "2024-01-01"
+pages_build_output_dir = "."
 
-[vars]
-# Remove.bg API Key 通过 wrangler secret 设置，不写在这里
-
-[[rules]]
-type = "ESModule"
-globs = ["**/*.js"]
+[[d1_databases]]
+binding = "DB"
+database_name = "bg_remover_users"
+database_id = "988736ce-e8f4-44d4-9f82-b38957e551c1"
