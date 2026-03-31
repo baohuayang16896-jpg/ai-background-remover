@@ -1,8 +1,3 @@
-// 处理 OAuth 回调
-if (window.location.pathname === '/auth/callback') {
-    auth.handleCallback();
-}
-
 // UI 元素
 const authSection = document.getElementById('authSection');
 const userInfo = document.getElementById('userInfo');

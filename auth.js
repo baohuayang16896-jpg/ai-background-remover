@@ -20,39 +20,10 @@ class Auth {
         const params = new URLSearchParams({
             client_id: GOOGLE_CLIENT_ID,
             redirect_uri: REDIRECT_URI,
-            response_type: 'token',
+            response_type: 'code',
             scope: 'profile email'
         });
         window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
-    }
-
-    async handleCallback() {
-        const hash = window.location.hash.substring(1);
-        const params = new URLSearchParams(hash);
-        const accessToken = params.get('access_token');
-
-        if (accessToken) {
-            const response = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
-                headers: { Authorization: `Bearer ${accessToken}` }
-            });
-            const userData = await response.json();
-            
-            this.user = {
-                google_id: userData.id,
-                name: userData.name,
-                email: userData.email,
-                picture: userData.picture
-            };
-            
-            await fetch(`${API_BASE}/user`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(this.user)
-            });
-            
-            localStorage.setItem('user', JSON.stringify(this.user));
-            window.location.href = '/';
-        }
     }
 
     logout() {

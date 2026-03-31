@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>回调测试</title>
+</head>
+<body>
+    <h1>回调结果</h1>
+    <pre id="result"></pre>
+    
+    <script>
+        const hash = window.location.hash.substring(1);
+        const params = new URLSearchParams(hash);
+        const result = {
+            access_token: params.get('access_token') ? '已获取' : '未获取',
+            error: params.get('error') || '无',
+            完整hash: window.location.hash
+        };
+        document.getElementById('result').textContent = JSON.stringify(result, null, 2);
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录测试</title>
+</head>
+<body>
+    <h1>Google 登录测试</h1>
+    <button id="testBtn">点击测试登录</button>
+    <div id="status"></div>
+    
+    <script>
+        const GOOGLE_CLIENT_ID = '35125519641-lubljhc670hl669qb4u70km61dklc42u.apps.googleusercontent.com';
+        const REDIRECT_URI = window.location.origin + '/test-callback.html';
+        
+        document.getElementById('testBtn').addEventListener('click', () => {
+            document.getElementById('status').textContent = '正在跳转...';
+            const params = new URLSearchParams({
+                client_id: GOOGLE_CLIENT_ID,
+                redirect_uri: REDIRECT_URI,
+                response_type: 'token',
+                scope: 'profile email'
+            });
+            window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
+        });
+    </script>
+</body>
+</html>
