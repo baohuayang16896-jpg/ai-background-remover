@@ -25,7 +25,7 @@ export async function onRequest(context) {
     
     if (!tokens.access_token) {
       const errorMsg = tokens.error_description || tokens.error || 'Failed to get access token';
-      throw new Error(errorMsg);
+      throw new Error(`Token error: ${errorMsg} | Response: ${JSON.stringify(tokens)}`);
     }
 
     // 获取用户信息
