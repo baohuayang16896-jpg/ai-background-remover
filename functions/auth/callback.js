@@ -34,14 +34,20 @@ export async function onRequest(context) {
     });
     const userData = await userResponse.json();
 
-    // 保存到数据库
-    await env.DB.prepare(
-      `INSERT INTO users (google_id, email, name, picture) 
-       VALUES (?, ?, ?, ?)
-       ON CONFLICT(google_id) DO UPDATE SET 
-       email=excluded.email, name=excluded.name, 
-       picture=excluded.picture, last_login=strftime('%s', 'now')`
-    ).bind(userData.id, userData.email, userData.name, userData.picture).run();
+    // 保存到数据库（如果 DB 可用）
+    if (env.DB && env.DB.prepare) {
+      try {
+        await env.DB.prepare(
+          `INSERT INTO users (google_id, email, name, picture) 
+           VALUES (?, ?, ?, ?)
+           ON CONFLICT(google_id) DO UPDATE SET 
+           email=excluded.email, name=excluded.name, 
+           picture=excluded.picture, last_login=strftime('%s', 'now')`
+        ).bind(userData.id, userData.email, userData.name, userData.picture).run();
+      } catch (dbErr) {
+        console.error('Database error:', dbErr);
+      }
+    }
 
     // 返回 HTML 页面，将用户信息存储到 localStorage 并跳转
     return new Response(`
@@ -65,6 +71,9 @@ window.location.href = '/';
     });
 
   } catch (err) {
-    return new Response(`登录失败: ${err.message}`, { status: 500 });
+    return new Response(`登录失败: ${err.message}<br><br>调试信息: ${err.stack || '无'}`, { 
+      status: 500,
+      headers: { 'Content-Type': 'text/html;charset=UTF-8' }
+    });
   }
 }
